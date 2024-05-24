@@ -1,0 +1,7 @@
+**/*.mp4
+**/*.mkv
+.venv/
+node_modules/
+.idea/
+__pycache__/
+uploads/

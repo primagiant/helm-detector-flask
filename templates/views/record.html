@@ -1,0 +1,20 @@
+{% extends "layouts/main_layouts.html" %}
+
+{% block content %}
+    <h1>Upload Video File</h1>
+    <form id="uploadForm" action="{{ url_for('record.upload_video') }}" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" id="fileInput" required>
+        <button type="submit">Upload</button>
+    </form>
+    <div id="loadingIndicator" style="display: none;">Uploading...</div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+{% endblock %}

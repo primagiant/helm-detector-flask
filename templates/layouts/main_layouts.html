@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ url_for('static',filename='css/output.css') }}" rel="stylesheet">
+    <title>Detector</title>
+</head>
+<body>
+<div>
+    <aside
+            class="fixed top-0 bottom-0 flex flex-col w-24 justify-center items-center bg-primary h-screen shadow-sm">
+        <div class="flex flex-col gap-4">
+            <a href="{{ url_for('stream.index') }}"
+               class="{{ 'bg-active text-white w-16 h-16 flex justify-center items-center rounded-lg' if request.path == url_for('stream.index') else 'w-16 h-16 flex justify-center items-center rounded-lg' }}">
+                {% include 'components/home_icon.html' %}
+            </a>
+            <a href="{{ url_for('record.index') }}"
+               class="{{ 'bg-active text-white w-16 h-16 flex justify-center items-center rounded-lg' if request.path == url_for('record.index') else 'w-16 h-16 flex justify-center items-center rounded-lg' }}">
+                {% include 'components/record_icon.html' %}
+            </a>
+        </div>
+        <div class="absolute bottom-5">
+            <a href="{{ url_for('about.index') }}"
+               class="{{ 'bg-active text-white w-16 h-16 flex justify-center items-center rounded-lg' if request.path == url_for('about.index') else 'w-16 h-16 flex justify-center items-center rounded-lg' }}">
+                {% include 'components/info_icon.html' %}
+            </a>
+        </div>
+    </aside>
+
+    <main class="ml-24 w-[calc(100% - 6rem)]">
+        {% block content %}{% endblock %}
+    </main>
+</div>
+</body>
+</html>
