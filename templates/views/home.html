@@ -1,60 +1,21 @@
-{% extends "layouts/main_layouts.html" %}
-
-{% block content %}
-    <div class="grid grid-cols-9 grid-rows-8 gap-4 h-screen p-4">
-        <div class="col-span-6 row-span-6 overflow-hidden rounded-md">
-            <h1 class="text-2xl font-bold mb-[10px]">Realtime Violation Detection</h1>
-            <div class="rounded-md bg-gray-200 w-full h-full">
-                <div id="videoCover" class="bg-gray-200 h-full rounded-md flex flex-col justify-center items-center w-full">
-                    <button class="bg-red-500 py-4 px-8 rounded-md text-white" onclick="startCamera()">Start Camera
-                    </button>
-                </div>
-                <div id="videoFeed" style="display: none" class="bg-gray-200 h-full rounded-md w-full relative group/canvas">
-                    <img src="{{ url_for('stream.streaming') }}" class="h-full w-full rounded-md" alt="">
-                    <div
-                            class="absolute top-0 left-0 group-hover/canvas:opacity-100 flex opacity-0 justify-center items-center w-full h-full transition-all duration-100">
-                        <button class="bg-red-500 py-4 px-8 rounded-md text-white" onclick="stopCamera()">
-                            Stop Camera
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-span-3 row-span-8 overflow-hidden rounded-md">
-            <h2 class="text-base font-semibold mt-[8px] mb-[10px] text-gray-600">Violation Result</h2>
-            <div class="rounded-md bg-gray-200 w-full h-full">
-            </div>
-        </div>
-
-        <div class="col-span-3 row-span-2 rounded-md bg-gray-200">
-            <div></div>
-        </div>
-
-        <div class="col-span-3 row-span-2 rounded-md bg-gray-200">
-            <div></div>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Violation Detection App</title>
+    <link href="{{ url_for('static',filename='css/output.css') }}" rel="stylesheet">
+</head>
+<body>
+<div class="h-screen w-screen flex flex-col justify-center items-center gap-8">
+    <h1 class="text-4xl font-black">Helm Violation <br>Detection App</h1>
+    <div class="flex gap-4">
+        <a href="{{ url_for('stream.index') }}" class="bg-gray-200 p-8 rounded-lg hover:bg-gray-300 shadow cursor-pointer">
+            <p>From Camera</p>
+        </a>
+        <a href="{{ url_for('upload.index') }}" class="bg-gray-200 p-8 rounded-lg hover:bg-gray-300 shadow cursor-pointer">
+            <p>From Video</p>
+        </a>
     </div>
-
-    <script>
-        function startCamera() {
-            fetch('/start_camera')
-                .then(response => {
-                    if (response.ok) {
-                        document.getElementById('videoFeed').style.display = 'block';
-                        document.getElementById('videoCover').classList.add("hidden");
-                    }
-                });
-        }
-
-        function stopCamera() {
-            fetch('/stop_camera')
-                .then(response => {
-                    if (response.ok) {
-                        document.getElementById('videoFeed').style.display = 'none';
-                        document.getElementById('videoCover').classList.remove("hidden");
-                    }
-                });
-        }
-    </script>
-{% endblock %}
+</div>
+</body>
+</html>

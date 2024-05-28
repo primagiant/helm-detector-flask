@@ -6,7 +6,7 @@ from . import stream
 
 @stream.route("/")
 def index():
-    return render_template("views/home.html")
+    return render_template("views/stream.html")
 
 
 @stream.route('/start_camera')

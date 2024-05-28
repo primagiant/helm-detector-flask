@@ -14,7 +14,7 @@
                             </form>
                             <div class="flex justify-between items-center gap-2">
                                 <button onclick="window.location='{{ url_for('record.index', filename=file) }}'"
-                                        class="bg-active hover:bg-activeHover px-4 py-2 rounded-md text-white text-sm">
+                                        class="bg-indigo-500 hover:bg-indigo-600 px-4 py-2 rounded-md text-white text-sm">
                                     Detect Video
                                 </button>
                                 <button onclick="if(confirm('Are you sure delete this file?')){document.getElementById('delete-form-{{ file }}').submit()};"

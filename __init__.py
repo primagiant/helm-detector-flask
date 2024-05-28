@@ -4,8 +4,11 @@ from flask import Flask
 def create_app():
     app = Flask(__name__)
 
+    from .app.home import home as home_blueprint
+    app.register_blueprint(home_blueprint, url_prefix='/')
+
     from .app.stream import stream as stream_blueprint
-    app.register_blueprint(stream_blueprint, url_prefix='/')
+    app.register_blueprint(stream_blueprint, url_prefix='/stream')
 
     from .app.record import record as record_blueprint
     app.register_blueprint(record_blueprint, url_prefix='/record')
