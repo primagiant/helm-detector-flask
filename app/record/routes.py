@@ -1,28 +1,31 @@
 import os
 
-from flask import render_template, request, flash, redirect, url_for
+import cv2
+from flask import render_template, Response
 
 from . import record
 
 
-@record.route("/")
-def index():
-    return render_template("views/record.html")
+@record.route("/<filename>")
+def index(filename):
+    return render_template("views/record.html", filename=filename)
 
 
-@record.route('/upload_video', methods=['POST'])
-def upload_video():
-    if "file" not in request.files:
-        flash("No file part")
-        return redirect(request.url)
+@record.route('/video_feed/<filename>')
+def video_feed(filename):
+    video_path = os.path.join('uploads', 'video', filename)
+    return Response(generate_frames(video_path), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-    file = request.files['file']
-    if file.filename == '':
-        flash("No selected file")
-        return redirect(request.url)
 
-    if file:
-        filename = file.filename
-        file.save(os.path.join('uploads/video', filename))
-        flash('File saved successfully!')
-        return redirect(url_for('record.index'))
+def generate_frames(video_path):
+    cap = cv2.VideoCapture(video_path)
+    while cap.isOpened():
+        success, frame = cap.read()
+        if not success:
+            break
+        else:
+            ret, buffer = cv2.imencode('.jpg', frame)
+            frame = buffer.tobytes()
+            yield (b'--frame\r\n'
+                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+ 

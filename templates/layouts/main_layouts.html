@@ -15,8 +15,8 @@
                class="{{ 'bg-active text-white w-16 h-16 flex justify-center items-center rounded-lg' if request.path == url_for('stream.index') else 'w-16 h-16 flex justify-center items-center rounded-lg' }}">
                 {% include 'components/home_icon.html' %}
             </a>
-            <a href="{{ url_for('record.index') }}"
-               class="{{ 'bg-active text-white w-16 h-16 flex justify-center items-center rounded-lg' if request.path == url_for('record.index') else 'w-16 h-16 flex justify-center items-center rounded-lg' }}">
+            <a href="{{ url_for('upload.index') }}"
+               class="{{ 'bg-active text-white w-16 h-16 flex justify-center items-center rounded-lg' if request.path == url_for('upload.index') else 'w-16 h-16 flex justify-center items-center rounded-lg' }}">
                 {% include 'components/record_icon.html' %}
             </a>
         </div>

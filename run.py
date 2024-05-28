@@ -11,4 +11,5 @@ if not os.path.exists(app.config["VIDEO_UPLOAD"]):
     os.makedirs(app.config["VIDEO_UPLOAD"])
 
 if __name__ == '__main__':
+    app.debug = True
     app.run(debug=True)

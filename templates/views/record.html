@@ -1,20 +1,24 @@
 {% extends "layouts/main_layouts.html" %}
 
 {% block content %}
-    <h1>Upload Video File</h1>
-    <form id="uploadForm" action="{{ url_for('record.upload_video') }}" method="POST" enctype="multipart/form-data">
-        <input type="file" name="file" id="fileInput" required>
-        <button type="submit">Upload</button>
-    </form>
-    <div id="loadingIndicator" style="display: none;">Uploading...</div>
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul>
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
+    <div class="grid grid-cols-9 grid-rows-8 gap-4 h-screen p-4">
+        <div class="col-span-6 row-span-6 overflow-hidden rounded-md">
+            <h1 class="text-2xl font-bold mb-[10px]">Video Detection</h1>
+            <img src="{{ url_for('record.video_feed', filename=filename) }}" class="h-full w-full rounded-md" alt="">
+        </div>
+
+        <div class="col-span-3 row-span-8 overflow-hidden rounded-md">
+            <h2 class="text-base font-semibold mt-[8px] mb-[10px] text-gray-600">Violation Result</h2>
+            <div id="file-list" class="rounded-md bg-gray-200 w-full h-full">
+            </div>
+        </div>
+
+        <div class="col-span-3 row-span-2 rounded-md bg-gray-200">
+            <div></div>
+        </div>
+
+        <div class="col-span-3 row-span-2 rounded-md bg-gray-200">
+            <div></div>
+        </div>
+    </div>
 {% endblock %}

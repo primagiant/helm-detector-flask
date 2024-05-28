@@ -10,6 +10,9 @@ def create_app():
     from .app.record import record as record_blueprint
     app.register_blueprint(record_blueprint, url_prefix='/record')
 
+    from .app.upload import upload as upload_blueprint
+    app.register_blueprint(upload_blueprint, url_prefix='/upload')
+
     from .app.about import about as about_blueprint
     app.register_blueprint(about_blueprint, url_prefix='/about')
 
